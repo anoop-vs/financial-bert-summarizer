@@ -10,6 +10,8 @@ custom_config.output_hidden_states=True
 custom_tokenizer = AutoTokenizer.from_pretrained('ahmedrachid/FinancialBERT')
 custom_model = AutoModel.from_pretrained('ahmedrachid/FinancialBERT', config=custom_config)
 
+model = Summarizer(custom_model=custom_model, custom_tokenizer=custom_tokenizer)
+
 st.header("ANTPHY Financial Text Summarizer")
 input = st.text_area('Enter your text: ', 'Enter your text')
 
@@ -17,6 +19,5 @@ num_sent = st.number_input('Number of sentences', min_value=1, max_value=50, val
 
 if st.button('Summarize'):
     input = re.sub(r'\([^)]*\)', '', input)
-    model = Summarizer(custom_model=custom_model, custom_tokenizer=custom_tokenizer)
     summary = model(input,num_sentences=num_sent)
     st.markdown(summary)
