@@ -5,6 +5,7 @@ import streamlit as st
 import re
 import gc
 
+@st.cache(allow_output_mutation=True)
 def load_model():
     # Load model, model config and tokenizer via Transformers
     custom_config = AutoConfig.from_pretrained('ahmedrachid/FinancialBERT')
